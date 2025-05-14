@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { AuthenticatedRequest } from '../middleware/auth';
 
 export default function talksRoutes(prisma: PrismaClient): Router {
   const router = Router();
@@ -9,7 +10,7 @@ export default function talksRoutes(prisma: PrismaClient): Router {
     res.json(talks);
   });
 
-  router.get('/:id', async (req: Request<{ id: string; }>, res: any) => {
+  router.get('/:id', async (req: Request<{id: string}>, res: any) => {
     const { id } = req.params;
     const talk = await prisma.talk.findUnique({
       where: {
