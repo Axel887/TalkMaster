@@ -61,6 +61,7 @@ model Talk {
 model Slot {
   id         Int      @id @default(autoincrement())
   date       DateTime
+  index      Int
   room       Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId     Int
   reservedBy User     @relation(fields: [userId], references: [id], onDelete: Cascade)

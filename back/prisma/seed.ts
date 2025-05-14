@@ -44,9 +44,13 @@ async function main() {
   });
 
   // Create a slot (reservation)
+
+  const date = new Date();
+
   await prisma.slot.create({
     data: {
-      date: new Date(), // today
+      date, // today
+      index: (date.getHours() * 60 + date.getMinutes()) / 15, // index of the slot
       roomId: room.id,
       userId: user.id,
       talkId: talk.id,

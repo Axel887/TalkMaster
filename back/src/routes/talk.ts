@@ -53,7 +53,7 @@ export default function talksRoutes(prisma: PrismaClient): Router {
   //Talk Modification
   router.put('/:id', async (req: Request<{ id: string, title: string, description: string, status: string, roomId: number, userId: string }>, res: any) => {
     const { id } = req.params;
-    const { title, description, roomId, status, userId } = req.body;
+    const { title, description, roomId, status, userId, duration } = req.body;
 
     if (!userId) {
       return res.status(400).json({ error: 'userId est requis pour modifier un talk' });
@@ -75,6 +75,7 @@ export default function talksRoutes(prisma: PrismaClient): Router {
         title,
         description,
         roomId,
+        duration,
         status,
       },
     }).then((updatedTalk: object) => {
