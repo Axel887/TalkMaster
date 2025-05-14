@@ -1,13 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 
-function formatDateToYMD(date: Date): string {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Janvier = 0
-    const year = date.getFullYear();
-    return `${year}-${month}-${day}`;
-}
-
 export default function slotsRoutes(prisma: PrismaClient): Router {
     const router = Router();
 
