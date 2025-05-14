@@ -7,13 +7,9 @@ export default function slotsRoutes(prisma: PrismaClient): Router {
     router.get('/', async (req: Request<{roomId: string, date: string }>, res: any) => {
         const { roomId, date } = req.query;
 
-        if (!roomId || !date) {
-            return res.status(400).json({ error: 'roomId and date are required' });
-        }
+        if (!roomId || !date) return res.status(400).json({ error: 'roomId and date are required' });
 
-        if (typeof date !== 'string') {
-            return res.status(400).json({ error: 'Invalid date format' });
-        }
+        if (typeof date !== 'string') return res.status(400).json({ error: 'Invalid date format' });
 
         const baseDate = new Date(date);
         baseDate.toLocaleString('fr-FR', {
@@ -54,9 +50,7 @@ export default function slotsRoutes(prisma: PrismaClient): Router {
     router.post('/assign', async (req: Request<{ roomId: number, date: string, userId: string, talkId: number }>, res: any) => {
         const { roomId, date, userId, talkId } = req.body;
 
-        if (!roomId || !date || !userId || !talkId) {
-            return res.status(400).json({ error: 'roomId, date, talkId and userId are required' });
-        }
+        if (!roomId || !date || !userId || !talkId) return res.status(400).json({ error: 'roomId, date, talkId and userId are required' });
 
         const talk = await prisma.talk.findUnique({
             where: { id: talkId },
@@ -65,11 +59,8 @@ export default function slotsRoutes(prisma: PrismaClient): Router {
             }
         });
 
-        console.log(talk)
-
-        if (talk.Slot.length > 0) return res.status(400).json({ error: 'Talk already has slots assigned' });
-
         if (!talk) return res.status(404).json({ error: 'Talk not found' });
+        if (talk.Slot.length > 0) return res.status(400).json({ error: 'Talk already has slots assigned' });
 
         const talkDuration = talk.duration;
 
@@ -95,13 +86,9 @@ export default function slotsRoutes(prisma: PrismaClient): Router {
             },
         });
 
-        const isTaken = existingSlots.some((slot: any) => {
-            return slot.index >= index && slot.index < index + talkDuration;
-        });
+        const isTaken = existingSlots.some((slot: any) => slot.index >= index && slot.index < index + talkDuration);
 
-        if (isTaken) {
-            return res.status(400).json({ error: 'One or more selected slots are already reserved' });
-        }
+        if (isTaken) return res.status(400).json({ error: 'One or more selected slots are already reserved' });
 
         // Reserve the slots
         await Promise.all(
