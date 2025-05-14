@@ -45,6 +45,7 @@ model Talk {
   id          Int        @id @default(autoincrement())
   title       String
   subject     String @default("")
+  date        DateTime @default(now())
   description String?
   duration    Int    @default(0)
   status      String     @default("pending")

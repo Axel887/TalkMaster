@@ -28,6 +28,7 @@ async function main() {
       title: 'Introduction to Prisma',
       duration: 1,
       subject: 'Databases',
+      date: new Date(), // today
       description: 'How to use Prisma with TypeScript',
       status: 'confirmed',
       userId: user.id,
