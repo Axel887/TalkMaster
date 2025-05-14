@@ -82,5 +82,27 @@ export default function usersRoutes(prisma: PrismaClient): Router {
     });
   });
 
+  router.get('/me', authMiddleware, async (req: AuthenticatedRequest, res: any) => {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: req.userId,
+      },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        role: true,
+      },
+    });
+    if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé' });
+    res.json(user);
+  });
+
+  router.post('/logout', authMiddleware, async (req: AuthenticatedRequest, res: any) => {
+    res.clearCookie('token');
+    res.json({ message: 'Déconnexion réussie' });
+  });
+
   return router;
 }

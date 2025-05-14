@@ -7,13 +7,13 @@ import cookieParser from 'cookie-parser';
 import { authMiddleware } from './middleware/auth';
 const app = express();
 import cors from 'cors';
-import { organizerMiddleware } from './middleware/isOrganizer';
+import { organizerMiddleware } from './middleware/organizer';
 
 const prisma = new PrismaClient();
 
 app.use(cors({
   origin: 'http://localhost:5173',
-  // credentials: true,
+  credentials: true,
 }));
 
 app.use(express.json());

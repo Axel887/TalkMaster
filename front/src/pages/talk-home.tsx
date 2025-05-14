@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { Plus } from "lucide-react";
+import { useAuth } from "../context/authContext";
 
 export const Talk = () => {
-  return (
+
+  const { isAuthenticated, logout } = useAuth();
+
+  return isAuthenticated && (
     <div className="flex flex-col items-center justify-center h-screen">
+      <button onClick={logout}>logout</button>
       <h1 className="text-xl font-bold mb-8 text-white">
         Bienvenue sur TalksCenter
       </h1>
