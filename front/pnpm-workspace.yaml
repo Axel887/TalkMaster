@@ -1,0 +1,4 @@
+ignoredBuiltDependencies:
+  - '@mui/x-telemetry'
+  - '@tailwindcss/oxide'
+  - esbuild
