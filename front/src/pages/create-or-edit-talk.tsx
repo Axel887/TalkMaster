@@ -4,19 +4,18 @@ import FormControl from "@mui/material/FormControl";
 import { Button, MenuItem, TextField, Typography } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { useState } from "react";
 import { fieldSx } from "../utils/helper";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
-import type { TalkProps } from "../type/talk.type";
-import { defaultTalk } from "../constante/talk";
+// import type { TalkProps } from "../type/talk.type";
 
-interface CreateTalkProps {
-  talk: TalkProps | null;
-}
+// interface CreateTalkProps {
+//   talk: TalkProps | null;
+// }
 
-export const CreateTalk = ({ talk }: CreateTalkProps) => {
+export const CreateTalk = () => {
   const [date, setDate] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
@@ -26,13 +25,13 @@ export const CreateTalk = ({ talk }: CreateTalkProps) => {
   const isCreatePage = location.pathname === "/create-talk";
   const isEditPage = location.pathname === "/edit-talk/:id";
 
-  const handleTalk = (talk: TalkProps) => {
-    if (talk.id) {
-      // edit talk
-    } else {
-      // create talk
-    }
-  };
+  // const handleTalk = (talk: TalkProps) => {
+  //   if (talk.id) {
+  //     // edit talk
+  //   } else {
+  //     // create talk
+  //   }
+  // };
 
   // Reset all fields
   const handleCancel = () => {

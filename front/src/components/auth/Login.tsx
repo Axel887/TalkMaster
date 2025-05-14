@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const privateAuth = query.get("private") === "true";
 
   const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
+    _: React.MouseEvent<HTMLElement>,
     newAuthMethod: string
   ) => {
     if (newAuthMethod !== null) {
