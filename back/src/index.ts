@@ -3,9 +3,9 @@ import { PrismaClient } from '../generated/prisma';
 import usersRoutes from './routes/user';
 import talksRoutes from './routes/talk';
 import organizerTalksRoute from './routes/organizerTalks';
-const app = express();
 import cors from 'cors';
 
+const app = express();
 const prisma = new PrismaClient();
 
 app.use(cors({
